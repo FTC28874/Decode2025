@@ -27,7 +27,7 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-package org.firstinspires.ftc.robotcontroller.external.samples;
+package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
@@ -63,9 +63,8 @@ import com.qualcomm.robotcore.util.ElapsedTime;
  * Remove or comment out the @Disabled line to add this OpMode to the Driver Station OpMode list
  */
 
-@TeleOp(name="Basic: Omni Linear OpMode", group="Linear OpMode")
-@Disabled
-public class BasicOmniOpMode_Linear extends LinearOpMode {
+@TeleOp(name="Kavish_Teleop", group="Linear OpMode")
+public class Kavish_Teleop extends LinearOpMode {
 
     // Declare OpMode members for each of the 4 motors.
     private ElapsedTime runtime = new ElapsedTime();
@@ -83,7 +82,7 @@ public class BasicOmniOpMode_Linear extends LinearOpMode {
         backLeftDrive = hardwareMap.get(DcMotor.class, "back_left_drive");
         frontRightDrive = hardwareMap.get(DcMotor.class, "front_right_drive");
         backRightDrive = hardwareMap.get(DcMotor.class, "back_right_drive");
-
+        backRightDrive = hardwareMap.get(DcMotor.class, "back_right_drive");
         // ########################################################################################
         // !!!            IMPORTANT Drive Information. Test your motor directions.            !!!!!
         // ########################################################################################
@@ -109,6 +108,10 @@ public class BasicOmniOpMode_Linear extends LinearOpMode {
         // run until the end of the match (driver presses STOP)
         while (opModeIsActive()) {
             double max;
+
+            if (gamepad1.dpad_down) {
+                testMotor.setPower(1);
+            }
 
             // POV Mode uses left joystick to go forward & strafe, and right joystick to rotate.
             double axial   = -gamepad1.left_stick_y;  // Note: pushing stick forward gives negative value
