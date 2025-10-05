@@ -72,6 +72,7 @@ public class Kavish_Teleop extends LinearOpMode {
     private DcMotor backLeftDrive = null;
     private DcMotor frontRightDrive = null;
     private DcMotor backRightDrive = null;
+    private DcMotor testMotor = null''
 
     @Override
     public void runOpMode() {
@@ -83,6 +84,7 @@ public class Kavish_Teleop extends LinearOpMode {
         frontRightDrive = hardwareMap.get(DcMotor.class, "front_right_drive");
         backRightDrive = hardwareMap.get(DcMotor.class, "back_right_drive");
         backRightDrive = hardwareMap.get(DcMotor.class, "back_right_drive");
+        testMotor = hardwareMap.get(DcMotor.class, "testMotor");
         // ########################################################################################
         // !!!            IMPORTANT Drive Information. Test your motor directions.            !!!!!
         // ########################################################################################
