@@ -74,7 +74,7 @@ public class SamitTeleOp extends LinearOpMode {
     private DcMotor backLeftDrive = null;
     private DcMotor frontRightDrive = null;
     private DcMotor backRightDrive = null;
-192.168.--.48
+
     @Override
     public void runOpMode() {
 
