@@ -120,15 +120,6 @@ public class TestIntake extends LinearOpMode {
             */
 
             // Send calculated power to wheels
-            
-            
-            
-            
 
-            
-            
-            
-            
-            
         }
     }}
