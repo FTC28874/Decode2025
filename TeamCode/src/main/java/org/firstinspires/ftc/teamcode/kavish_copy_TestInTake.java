@@ -47,7 +47,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
  * Note that a Mecanum drive must display an X roller-pattern when viewed from above.
  *
  * Also note that it is critical to set the correct rotation direction for each motor.  See details below.
- *
+ * 67
  * Holonomic drives provide the ability for the robot to move in three axes (directions) simultaneously.
  * Each motion axis is controlled by one Joystick axis.
  *
@@ -63,8 +63,8 @@ import com.qualcomm.robotcore.util.ElapsedTime;
  * Remove or comment out the @Disabled line to add this OpMode to the Driver Station OpMode list
  */
 
-@TeleOp(name="Kavish_Teleop", group="Linear OpMode")
-public class Kavish_Teleop extends LinearOpMode {
+@TeleOp(name="kavish_copy_TestInTake", group="Linear OpMode")
+public class kavish_copy_TestInTake extends LinearOpMode {
 
     // Declare OpMode members for each of the 4 motors.
     private ElapsedTime runtime = new ElapsedTime();
@@ -72,7 +72,7 @@ public class Kavish_Teleop extends LinearOpMode {
     private DcMotor backLeftDrive = null;
     private DcMotor frontRightDrive = null;
     private DcMotor backRightDrive = null;
-    private DcMotor testMotor = null''
+    private DcMotor testMotor = null;
 
     @Override
     public void runOpMode() {
