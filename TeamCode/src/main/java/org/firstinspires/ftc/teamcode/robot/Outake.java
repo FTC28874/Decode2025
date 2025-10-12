@@ -21,7 +21,7 @@ public class Outake {
     }
     public enum PowerState {
         RUN(1),
-        NOTRUN(0),
+        NOT_RUN(0),
         REVERSE(-1);
         private final double power;
         PowerState(double power) {
@@ -35,9 +35,9 @@ public class Outake {
         feeder.setPower(PowerState.RUN.power);
     }
     public void StopShooter() {
-        outakeL.setPower(PowerState.NOTRUN.power);
-        outakeR.setPower(PowerState.NOTRUN.power);
-        feeder.setPower(PowerState.NOTRUN.power);
+        outakeL.setPower(PowerState.NOT_RUN.power);
+        outakeR.setPower(PowerState.NOT_RUN.power);
+        feeder.setPower(PowerState.NOT_RUN.power);
     }
     public void reverseFeeder() {
         feeder.setPower(PowerState.REVERSE.power);

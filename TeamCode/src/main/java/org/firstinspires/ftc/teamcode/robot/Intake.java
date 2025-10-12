@@ -16,7 +16,7 @@ public class Intake {
     }
     public enum PowerState {
         RUN(1.0),
-        NOTRUN(0.0),
+        NOT_RUN(0.0),
         REVERSE(-1.0);
         private final double power;
         PowerState(double power) {
@@ -28,7 +28,7 @@ public class Intake {
         intake.setPower(PowerState.RUN.power);
     }
     public void stopIntake() {
-        intake.setPower(PowerState.NOTRUN.power);
+        intake.setPower(PowerState.NOT_RUN.power);
     }
     public void reverseIntake() {
         intake.setPower(PowerState.REVERSE.power);
