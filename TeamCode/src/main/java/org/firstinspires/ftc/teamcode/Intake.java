@@ -20,18 +20,14 @@ public class Intake {
     }
 
     public void runIntake() {
-        intake.setPower(RUN);
+        intake.setPower(PowerState.RUN.power);
     }
     public void stopIntake() {
-        intake.setPower(0);
+        intake.setPower(PowerState.NOTRUN.power);
     }
     public void reverseIntake() {
-        intake.setPower(-1);
+        intake.setPower(PowerState.REVERSE.power);
     }
-    public void runFeeder() {
-        feeder.setPower(1);
-    }
-
 
 
 }
