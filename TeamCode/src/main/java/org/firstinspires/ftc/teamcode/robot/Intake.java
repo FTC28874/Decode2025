@@ -1,6 +1,7 @@
-package org.firstinspires.ftc.teamcode;
+package org.firstinspires.ftc.teamcode.robot;
 
-import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.hardwareMap;
+
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
@@ -9,6 +10,10 @@ public class Intake {
     private DcMotor intake = null;
     private DcMotor feeder = null;
 
+    public Intake() {
+        intake = hardwareMap.get(DcMotor.class, "intake");
+        feeder = hardwareMap.get(DcMotor.class, "feeder");
+    }
     public enum PowerState {
         RUN(1.0),
         NOTRUN(0.0),
