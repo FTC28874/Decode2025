@@ -7,8 +7,8 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 
 public class Intake {
     private ElapsedTime runtime = new ElapsedTime();
-    private DcMotor intake = null;
-    private DcMotor feeder = null;
+    private static DcMotor intake = null;
+    private static DcMotor feeder = null;
 
     public Intake() {
         intake = hardwareMap.get(DcMotor.class, "intake");
@@ -24,13 +24,13 @@ public class Intake {
         }
     }
 
-    public void runIntake() {
+    public static void runIntake() {
         intake.setPower(PowerState.RUN.power);
     }
-    public void stopIntake() {
+    public static void stopIntake() {
         intake.setPower(PowerState.NOT_RUN.power);
     }
-    public void reverseIntake() {
+    public static void reverseIntake() {
         intake.setPower(PowerState.REVERSE.power);
     }
 

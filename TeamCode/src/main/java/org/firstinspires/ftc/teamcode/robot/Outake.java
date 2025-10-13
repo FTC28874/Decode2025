@@ -8,16 +8,16 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 
 public class Outake {
     private ElapsedTime runtime = new ElapsedTime();
-    private DcMotor feeder = null;
-    private DcMotor outakeR = null;
-    private DcMotor outakeL = null;
+    private static DcMotor feeder = null;
+    private static DcMotor outakeR = null;
+    private static DcMotor outakeL = null;
 
     public Outake() {
         outakeR = hardwareMap.get(DcMotor.class, "outakeR");
         outakeL = hardwareMap.get(DcMotor.class, "outakeL");
         feeder = hardwareMap.get(DcMotor.class, "feeder");
-        outakeL.setDirection(DcMotorSimple.Direction.REVERSE);
-        outakeR.setDirection(DcMotorSimple.Direction.FORWARD);
+        outakeL.setDirection(DcMotorSimple.Direction.REVERSE); // may have to tweak these lines 19 and 20
+        outakeR.setDirection(DcMotorSimple.Direction.FORWARD); // in case that they are spinning in wrong direction
     }
     public enum PowerState {
         RUN(1),
@@ -29,17 +29,17 @@ public class Outake {
         }
     }
 
-    public void RunShooter() {
+    public static void RunShooter() {
         outakeL.setPower(PowerState.RUN.power);
         outakeR.setPower(PowerState.RUN.power);
         feeder.setPower(PowerState.RUN.power);
     }
-    public void StopShooter() {
+    public static void StopShooter() {
         outakeL.setPower(PowerState.NOT_RUN.power);
         outakeR.setPower(PowerState.NOT_RUN.power);
         feeder.setPower(PowerState.NOT_RUN.power);
     }
-    public void reverseFeeder() {
+    public static void ReverseFeeder() {
         feeder.setPower(PowerState.REVERSE.power);
     }
 
