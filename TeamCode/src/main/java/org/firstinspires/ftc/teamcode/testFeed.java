@@ -76,7 +76,6 @@ public class testFeed extends LinearOpMode {
         // to the names assigned during the robot configuration step on the DS or RC devices.
         testMotor2 = hardwareMap.get(DcMotor.class, "testMotor2");
 
-
         // Wait for the game to start (driver presses START)
         telemetry.addData("Status", "Initialized");
         telemetry.update();
