@@ -32,16 +32,19 @@ public class Outake {
     public static void RunShooter() {
         outakeL.setPower(PowerState.RUN.power);
         outakeR.setPower(PowerState.RUN.power);
-        feeder.setPower(PowerState.RUN.power);
     }
     public static void StopShooter() {
         outakeL.setPower(PowerState.NOT_RUN.power);
         outakeR.setPower(PowerState.NOT_RUN.power);
+    }
+    public static void RunFeeder() {
+        feeder.setPower(PowerState.RUN.power);
+    }
+    public static void StopFeeder() {
         feeder.setPower(PowerState.NOT_RUN.power);
     }
     public static void ReverseFeeder() {
-        feeder.setPower(PowerState.REVERSE.power);
-    }
+        feeder.setPower(PowerState.REVERSE.power);}
 
 
 }
