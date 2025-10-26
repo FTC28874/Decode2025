@@ -29,6 +29,7 @@ public class Outake {
         }
     }
 
+
     public static void RunShooter() {
         outakeL.setPower(PowerState.RUN.power);
         outakeR.setPower(PowerState.RUN.power);
