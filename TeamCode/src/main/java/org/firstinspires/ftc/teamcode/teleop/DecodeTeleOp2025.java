@@ -4,6 +4,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
+
 import org.firstinspires.ftc.teamcode.robot.Outake;
 import org.firstinspires.ftc.teamcode.robot.Intake;
 
@@ -13,8 +14,8 @@ public class DecodeTeleOp2025 extends LinearOpMode {
     // Declare OpMode members for each of the 4 motors.
     private ElapsedTime runtime = new ElapsedTime();
     private DcMotor driveFL = null;
-    private DcMotor driveFR = null;
     private DcMotor driveBL = null;
+    private DcMotor driveFR = null;
     private DcMotor driveBR = null;
 
     @Override
@@ -23,8 +24,8 @@ public class DecodeTeleOp2025 extends LinearOpMode {
         // Initialize the hardware variables. Note that the strings used here must correspond
         // to the names assigned during the robot configuration step on the DS or RC devices.
         driveFL = hardwareMap.get(DcMotor.class, "driveFL");
-        driveFR = hardwareMap.get(DcMotor.class, "driveFR");
         driveBL = hardwareMap.get(DcMotor.class, "driveBL");
+        driveFR = hardwareMap.get(DcMotor.class, "driveFR");
         driveBR = hardwareMap.get(DcMotor.class, "driveBR");
 
         driveFL.setDirection(DcMotor.Direction.REVERSE);
@@ -75,7 +76,7 @@ public class DecodeTeleOp2025 extends LinearOpMode {
             driveBL.setPower(powerBL);
             driveBR.setPower(powerBR);
 
-            // Show the elapsed game time and wheel power.
+            // ---- TELEMETRY ----
             telemetry.addData("Status", "Run Time: " + runtime.toString());
             telemetry.addData("Front left/Right", "%4.2f, %4.2f", powerFL, powerFR);
             telemetry.addData("Back  left/Right", "%4.2f, %4.2f", powerBL, powerBR);
@@ -86,6 +87,11 @@ public class DecodeTeleOp2025 extends LinearOpMode {
                 Outake.RunShooter();
             } else if (!gamepad2.right_bumper) {
                 Outake.StopShooter();
+            }
+            if (gamepad2.x) {
+                Outake.RunFeeder();
+            } else if (!gamepad2.x) {
+                Outake.StopFeeder();
             }
             if (gamepad2.left_bumper) {
                 Intake.runIntake();
