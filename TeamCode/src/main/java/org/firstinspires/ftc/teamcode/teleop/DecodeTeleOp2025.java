@@ -3,10 +3,12 @@ package org.firstinspires.ftc.teamcode.teleop;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.teamcode.robot.Outake;
 import org.firstinspires.ftc.teamcode.robot.Intake;
+
 
 @TeleOp(name="Decode TeleOp 2025", group="Linear OpMode")
 public class DecodeTeleOp2025 extends LinearOpMode {
@@ -32,6 +34,10 @@ public class DecodeTeleOp2025 extends LinearOpMode {
         driveBL.setDirection(DcMotor.Direction.REVERSE);
         driveFR.setDirection(DcMotor.Direction.FORWARD);
         driveBR.setDirection(DcMotor.Direction.FORWARD);
+
+    // Initialize subsystem hardware used by static helper classes
+    org.firstinspires.ftc.teamcode.robot.Outake.init(hardwareMap);
+    org.firstinspires.ftc.teamcode.robot.Intake.init(hardwareMap);
 
         // Wait for the game to start (driver presses START)
         telemetry.addData("Status", "Initialized");
@@ -59,7 +65,7 @@ public class DecodeTeleOp2025 extends LinearOpMode {
 
             // Normalize the values so no wheel power exceeds 100%
             // This ensures that the robot maintains the desired motion.
-            max = Math.max(Math.abs(powerFL), Math.abs(powerFL));
+            max = Math.max(Math.abs(powerFL), Math.abs(powerFR));
             max = Math.max(max, Math.abs(powerBL));
             max = Math.max(max, Math.abs(powerBR));
 
