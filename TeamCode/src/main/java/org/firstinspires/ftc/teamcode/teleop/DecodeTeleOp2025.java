@@ -87,7 +87,7 @@ public class DecodeTeleOp2025 extends LinearOpMode {
             telemetry.addData("Front left/Right", "%4.2f, %4.2f", powerFL, powerFR);
             telemetry.addData("Back  left/Right", "%4.2f, %4.2f", powerBL, powerBR);
             telemetry.update();
-
+// safiosdfkj
             // ---- SHOOTER / INTAKE CONTROL ----
             if (gamepad2.right_bumper) {
                 Outake.RunShooter();

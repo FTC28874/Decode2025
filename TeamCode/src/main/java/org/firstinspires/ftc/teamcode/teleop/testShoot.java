@@ -8,7 +8,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.teamcode.robot.Outake;
 import org.firstinspires.ftc.teamcode.robot.Intake;
-
+//asdlfhasdf
 @TeleOp(name="TestShooter", group="Linear OpMode")
 public class testShoot extends LinearOpMode {
 

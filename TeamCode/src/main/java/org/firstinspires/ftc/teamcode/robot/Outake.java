@@ -38,7 +38,7 @@ public class Outake {
         }
     }
 
-
+//asdfjhasdf
     public static void RunShooter() {
         if (shooterL != null && shooterR != null) {
             shooterL.setPower(PowerState.SHOOTER_RUN.power);
