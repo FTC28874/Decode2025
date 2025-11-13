@@ -29,6 +29,7 @@ public class Outake {
 
     public enum PowerState {
         RUN(1.0),
+        SHOOTER_RUN(0.4),
         NOT_RUN(0.0),
         REVERSE(-1.0);
         private final double power;
@@ -40,8 +41,8 @@ public class Outake {
 
     public static void RunShooter() {
         if (shooterL != null && shooterR != null) {
-            shooterL.setPower(PowerState.RUN.power);
-            shooterR.setPower(PowerState.RUN.power);
+            shooterL.setPower(PowerState.SHOOTER_RUN.power);
+            shooterR.setPower(PowerState.SHOOTER_RUN.power);
         }
     }
 
