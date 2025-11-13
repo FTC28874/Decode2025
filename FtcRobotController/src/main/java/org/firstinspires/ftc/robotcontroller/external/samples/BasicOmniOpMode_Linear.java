@@ -64,14 +64,12 @@ import com.qualcomm.robotcore.util.ElapsedTime;
  */
 
 @TeleOp(name="Basic: Omni Linear OpMode", group="Linear OpMode")
-public class BasicOmniOpMode_Linear extends LinearOpMode {
-
-    // Declare OpMode members for each of the 4 motors.
+public class BasicOmniOpMode_Linear extends LinearOpMode     // Declare OpMode members for each of the 4 motors.
     private ElapsedTime runtime = new ElapsedTime();
     private DcMotor frontLeftDrive = null;
     private DcMotor backLeftDrive = null;
     private DcMotor frontRightDrive = null;
-    private DcMotor backRightDrive = null;
+    private DcMotor backRightDrive = null
 
     @Override
     public void runOpMode() {
