@@ -45,6 +45,11 @@ public class Outake {
         }
     }
 
+    public static void SetShooterPower(double power) {
+        shooterL.setPower(power);
+        shooterR.setPower(power);
+    }
+
     public static void StopShooter() {
         if (shooterL != null && shooterR != null) {
             shooterL.setPower(PowerState.NOT_RUN.power);
