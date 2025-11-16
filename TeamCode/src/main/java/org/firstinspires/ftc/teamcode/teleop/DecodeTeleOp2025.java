@@ -59,8 +59,8 @@ public class DecodeTeleOp2025 extends LinearOpMode {
             // Combine the joystick requests for each axis-motion to determine each wheel's power.
             // Set up a variable for each drive wheel to save the power level for telemetry.
             double powerFL  = axial + lateral + yaw;
-            double powerFR = axial - lateral - yaw;
-            double powerBL   = axial - lateral + yaw;
+            double powerFR  = axial - lateral - yaw;
+            double powerBL  = axial - lateral + yaw;
             double powerBR  = axial + lateral - yaw;
 
             // Normalize the values so no wheel power exceeds 100%
