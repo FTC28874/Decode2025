@@ -17,7 +17,7 @@ public class apriltagtrackingthingy extends OpMode{
     @Override
     public void loop() {
         apriltag.update();
-        AprilTagDetection id20 = apriltag.getTagBySpecificId(20);
+        AprilTagDetection id20 = apriltag.getTagBySpecificId(24);
         telemetry.addData("id20 string", id20.toString());
     }
 }
