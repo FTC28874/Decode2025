@@ -45,7 +45,6 @@ public class apriltag {
         return detectedTags;
     }
 
-
     public void displayDetectionTelemetry(AprilTagDetection detectedId){
         if (detectedId == null) {return;}
         if (detectedId.metadata != null) {
