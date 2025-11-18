@@ -66,11 +66,8 @@ public class apriltag {
         return null;
     }
 
-    public void stop(){
-        if (visionPortal != null){
-            visionPortal.close();
-        }
+
     }
-}
+
 
 
