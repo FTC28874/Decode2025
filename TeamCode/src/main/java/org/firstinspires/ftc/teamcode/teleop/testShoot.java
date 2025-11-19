@@ -9,15 +9,18 @@ import org.firstinspires.ftc.teamcode.robot.Outake;
 @TeleOp(name="TestShooter", group="Linear OpMode")
 public class testShoot extends LinearOpMode {
 
+
     private ElapsedTime runtime = new ElapsedTime();
 
     @Override
     public void runOpMode() {
 
+        org.firstinspires.ftc.teamcode.robot.Outake.init(hardwareMap);
+
         waitForStart();
         while (opModeIsActive()) {
 
-            double shooterPower = -gamepad2.left_stick_y;
+            double shooterPower = 0.5;
 
             Outake.SetShooterPower(shooterPower);
 

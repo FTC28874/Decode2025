@@ -11,14 +11,14 @@ public class testFeed extends LinearOpMode {
 
     // Declare OpMode members for each of the 4 motors.
     private ElapsedTime runtime = new ElapsedTime();
-    private DcMotor testMotor2 = null;
+    private DcMotor intake = null;
 
     @Override
     public void runOpMode() {
 
         // Initialize the hardware variables. Note that the strings used here must correspond
         // to the names assigned during the robot configuration step on the DS or RC devices.
-        testMotor2 = hardwareMap.get(DcMotor.class, "testMotor2");
+        intake = hardwareMap.get(DcMotor.class, "intake");
 
         // Wait for the game to start (driver presses START)
         telemetry.addData("Status", "Initialized");
@@ -30,8 +30,8 @@ public class testFeed extends LinearOpMode {
         // run until the end of the match (driver presses STOP)
         while (opModeIsActive()) {
             double max = gamepad1.right_stick_y;
-            testMotor2.setPower(max);
+            intake.setPower(max);
 
-            // POV Mode uses left joystick to go forward & strafe, and right joystick to rotate.
+            telemetry.addData("Power", max);
         }
     }}

@@ -19,6 +19,8 @@ public class DecodeTeleOp2025 extends LinearOpMode {
     private DcMotor driveBL = null;
     private DcMotor driveFR = null;
     private DcMotor driveBR = null;
+    private double shooterSpeed = 0.5;
+
 
     @Override
     public void runOpMode() {
@@ -48,6 +50,9 @@ public class DecodeTeleOp2025 extends LinearOpMode {
 
         // run until the end of the match (driver presses STOP)
         while (opModeIsActive()) {
+
+            // shooter speed variable
+
             // ---- DRIVE CONTROL ----
             double max;
 
@@ -82,15 +87,29 @@ public class DecodeTeleOp2025 extends LinearOpMode {
             driveBL.setPower(powerBL);
             driveBR.setPower(powerBR);
 
+            if (gamepad1.dpad_up) {
+                shooterSpeed = shooterSpeed + 0.05;
+                while (gamepad1.dpad_up) {}
+            }
+            if (gamepad1.dpad_down) {
+                shooterSpeed = shooterSpeed - 0.05;
+                while (gamepad1.dpad_down) {}
+            }
+
             // ---- TELEMETRY ----
             telemetry.addData("Status", "Run Time: " + runtime.toString());
             telemetry.addData("Front left/Right", "%4.2f, %4.2f", powerFL, powerFR);
             telemetry.addData("Back  left/Right", "%4.2f, %4.2f", powerBL, powerBR);
+
+            telemetry.addData("Shooter Speed:", shooterSpeed);
             telemetry.update();
 // safiosdfkj
+
+
+
             // ---- SHOOTER / INTAKE CONTROL ----
             if (gamepad2.right_bumper) {
-                Outake.RunShooter();
+                Outake.SetShooterPower(shooterSpeed);
             } else if (!gamepad2.right_bumper) {
                 Outake.StopShooter();
             }
@@ -106,10 +125,13 @@ public class DecodeTeleOp2025 extends LinearOpMode {
             }
             if (gamepad2.a) {
                 Intake.reverseIntake();
-                Outake.ReverseFeeder();
             } else if (!gamepad2.a) {
                 Intake.stopIntake();
-                Outake.StopShooter();
+            }
+            if (gamepad2.b) {
+                Outake.ReverseFeeder();
+            } else if (!gamepad2.b) {
+                Outake.StopFeeder();
             }
 
         }
