@@ -133,6 +133,6 @@ public class DecodeTeleOp2025 extends LinearOpMode {
             } else if (!gamepad2.b) {
                 Outake.StopFeeder();
             }
-
+// something didn't update
         }
     }}
