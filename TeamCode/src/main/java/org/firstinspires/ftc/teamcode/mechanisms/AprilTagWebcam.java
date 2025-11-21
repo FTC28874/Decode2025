@@ -15,7 +15,7 @@ import org.firstinspires.ftc.vision.apriltag.AprilTagProcessor;
 import java.util.ArrayList;
 import java.util.List;
 
-public class apriltag {
+public class AprilTagWebcam {
     private AprilTagProcessor aprilTagProcessor;
     private VisionPortal visionPortal;
     private List<AprilTagDetection> detectedTags = new ArrayList<>();
@@ -32,25 +32,27 @@ public class apriltag {
                 .build();
 
         VisionPortal.Builder builder = new VisionPortal.Builder();
-        builder.setCamera(hwMap.get(WebcamName.class, "Webcam1"));
+        builder.setCamera(hwMap.get(WebcamName.class, "Webcam 1"));
         builder.setCameraResolution(new Size(640 , 480));
         builder.addProcessor(aprilTagProcessor);
 
         visionPortal = builder.build();
     }
     public void update(){
+
         detectedTags = aprilTagProcessor.getDetections();
     }
     public List<AprilTagDetection> getDetectedTags(){
+
         return detectedTags;
     }
     public void displayDetectionTelemetry(AprilTagDetection detectedId){
         if (detectedId == null) {return;}
         if (detectedId.metadata != null) {
             telemetry.addLine(String.format("\n==== (ID %d) %s", detectedId.id, detectedId.metadata.name));
-            telemetry.addLine(String.format("XYZ %6.1f %6.1f %6.1f  (inch)", detectedId.ftcPose.x, detectedId.ftcPose.y, detectedId.ftcPose.z));
+            telemetry.addLine(String.format("XYZ %6.1f %6.1f %6.1f  (centimeter)", detectedId.ftcPose.x, detectedId.ftcPose.y, detectedId.ftcPose.z));
             telemetry.addLine(String.format("PRY %6.1f %6.1f %6.1f  (deg)", detectedId.ftcPose.pitch, detectedId.ftcPose.roll, detectedId.ftcPose.yaw));
-            telemetry.addLine(String.format("RBE %6.1f %6.1f %6.1f  (inch, deg, deg)", detectedId.ftcPose.range, detectedId.ftcPose.bearing, detectedId.ftcPose.elevation));
+            telemetry.addLine(String.format("RBE %6.1f %6.1f %6.1f  (centimeter, deg, deg)", detectedId.ftcPose.range, detectedId.ftcPose.bearing, detectedId.ftcPose.elevation));
         } else {
             telemetry.addLine(String.format("\n==== (ID %d) Unknown", detectedId.id));
             telemetry.addLine(String.format("Center %6.0f %6.0f   (pixels)", detectedId.center.x, detectedId.center.y));
@@ -65,6 +67,13 @@ public class apriltag {
         }
         return null;
     }
+    public void  stop(){
+        if (visionPortal != null){
+            visionPortal.close();
+        }
+    }
+
+
 
     }
 
