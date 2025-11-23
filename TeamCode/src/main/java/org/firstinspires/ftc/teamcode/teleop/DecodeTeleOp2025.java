@@ -76,8 +76,8 @@ public class DecodeTeleOp2025 extends LinearOpMode {
 
             if (max > 1.0) {
                 powerFL  /= max;
-                powerFR /= max;
-                powerBL   /= max;
+                powerFR  /= max;
+                powerBL  /= max;
                 powerBR  /= max;
             }
 
