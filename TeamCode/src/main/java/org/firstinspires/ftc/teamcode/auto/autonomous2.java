@@ -1,10 +1,12 @@
 package org.firstinspires.ftc.teamcode.auto;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 
 @Autonomous(name="MecanumAuto", group="LinearOpmode")
+@Disabled
 public class autonomous2 extends LinearOpMode {
 
     // Drivetrain motors

@@ -4,9 +4,11 @@ package org.firstinspires.ftc.teamcode.robot;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
+import com.qualcomm.robotcore.hardware.DcMotorImplEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.util.ElapsedTime;
+import com.qualcomm.robotcore.util.Range;
 
 
 /**
@@ -16,34 +18,36 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 public class Outake {
     private static ElapsedTime runtime = new ElapsedTime();
     private static DcMotor feeder = null;
-    private static DcMotor shooterR = null;
-    private static DcMotor shooterL = null;
-    DcMotorEx motor;
-    DcMotorEx motor1;
-    double Kp  = 0;
-    //Integral Sum: This variable in the code (e.g., integral_sum in the image) is the running total of all previous errors, typically updated in every loop iteration. It is multiplied by Ki to form the integral component of the overall control output.
-    double integralSum = 0;
-    //Ki (Integral Gain): This value is multiplied by the integral sum to account for the accumulation of past errors over time. The primary purpose of the integral term is to eliminate any persistent, steady-state error that the proportional term might not fix on its own. The integral sum builds up until the error is eliminated, even if a non-zero output is needed to hold the target position or speed.
-    double Ki  = 0;
-    //Kd (Derivative Gain): This value determines the response based on the rate of change of the error (how fast the system is moving toward or away from the target). The derivative term helps to dampen oscillations and improve stability, allowing the system to react quickly to changes without overshooting the setpoint.
-    double Kd = 0;
-    double Kf = 0;
-    ElapsedTime timer  = new ElapsedTime();
-    private double lastError = 0;
+    private static DcMotorEx shooterR = null;
+    private static DcMotorEx shooterL = null;
+
+    private static final double COUNTS_PER_REVOLUTION = 28;
+
+    private static final double SHOOTER_RPM_HIGH = 6000.0;
+    private static final double SHOOTER_RPM_LOW = 100.0;
 
 
+    private static double Kp  = 0.001;     // Start small. Use to fix residual error.
+    private static double Ki  = 0.0;       // Start at 0. Use to eliminate steady-state error.
+    private static double Kd  = 0.0;       // Start at 0. Use to dampen overshoot/oscillations.
+    private static double Kf  = 0.0004;
+    private static double integralSum = 0;
+    private static double lastError = 0;
 
 
     /**
      * Initialize Outake hardware. Must be called once before using static methods.
      */
     public static void init(HardwareMap hardwareMap) {
-        shooterR = hardwareMap.get(DcMotor.class, "shooterR");
-        shooterL = hardwareMap.get(DcMotor.class, "shooterL");
+        shooterR = hardwareMap.get(DcMotorEx.class, "shooterR");
+        shooterL = hardwareMap.get(DcMotorEx.class, "shooterL");
         feeder = hardwareMap.get(DcMotor.class, "feeder");
         // Set directions - adjust if motors spin the wrong way
         shooterL.setDirection(DcMotorSimple.Direction.REVERSE);
         shooterR.setDirection(DcMotorSimple.Direction.FORWARD);
+
+        shooterL.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
+        shooterR.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
 
     }
 
@@ -64,6 +68,19 @@ public class Outake {
             shooterL.setPower(PowerState.SHOOTER_RUN.power);
             shooterR.setPower(PowerState.SHOOTER_RUN.power);
         }
+    }
+
+    public static void SetShooterSpeed(double shooterSpeed) {
+        double ticksPerSecond = (shooterSpeed * COUNTS_PER_REVOLUTION) / 60.0;
+
+        shooterL.setVelocity(ticksPerSecond);
+        shooterR.setVelocity(ticksPerSecond);
+    }
+
+    public static double GetCurrentRPM() {
+        double currentTicksPerSecond = shooterL.getVelocity();
+
+        return (currentTicksPerSecond * 60.0) / COUNTS_PER_REVOLUTION;
     }
 
     public static void SetShooterPower(double shooterPower) {
@@ -92,4 +109,32 @@ public class Outake {
         if (feeder != null) feeder.setPower(PowerState.REVERSE.power);
     }
 
+
+    public static double PIDControl(double reference, double state) {
+        // 1. Calculate Error
+        double error = reference - state;
+
+        // Time since last loop iteration (Delta Time)
+        double dt = runtime.seconds();
+        runtime.reset();
+
+        // 2. Integral Component (with anti-windup check)
+        // Adjust '100.0' based on the magnitude of error you want to ignore
+        if (Math.abs(error) < 100.0) {
+            integralSum += error * dt;
+        }
+
+        // 3. Derivative Component
+        double derivative = (error - lastError) / dt;
+        lastError = error;
+
+        // 4. Full PID + Feedforward Calculation
+        double output = (error * Kp) +
+                (integralSum * Ki) +
+                (derivative * Kd) +
+                (reference * Kf);
+
+        // 5. Clamp Output Power
+        return Range.clip(output, -1.0, 1.0);
+    }
 }

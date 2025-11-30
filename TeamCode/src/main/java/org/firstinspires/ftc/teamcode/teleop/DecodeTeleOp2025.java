@@ -19,7 +19,8 @@ public class DecodeTeleOp2025 extends LinearOpMode {
     private DcMotor driveBL = null;
     private DcMotor driveFR = null;
     private DcMotor driveBR = null;
-    private double shooterSpeed = 0.35;;
+    private double shooterSpeed = 0.35;
+    private double shooterEncSpeed = 1600.0;
 
 
     @Override
@@ -96,14 +97,26 @@ public class DecodeTeleOp2025 extends LinearOpMode {
                 while (gamepad1.dpad_down) {}
             }
 
+
+            if (gamepad1.dpad_right) {
+                shooterEncSpeed = shooterEncSpeed + 50;
+                while (gamepad1.dpad_right) {}
+            }
+            if (gamepad1.dpad_left) {
+                shooterEncSpeed = shooterEncSpeed - 50;
+                while (gamepad1.dpad_left) {}
+            }
+
             // ---- TELEMETRY ----
             telemetry.addData("Status", "Run Time: " + runtime.toString());
             telemetry.addData("Front left/Right", "%4.2f, %4.2f", powerFL, powerFR);
             telemetry.addData("Back  left/Right", "%4.2f, %4.2f", powerBL, powerBR);
 
             telemetry.addData("Shooter Speed:", shooterSpeed);
+            telemetry.addData("Shooter Target RPM: ", shooterEncSpeed);
+            telemetry.addData("Shooter RPM: ", Outake.GetCurrentRPM());
+            telemetry.addData("Error: ", shooterEncSpeed - Outake.GetCurrentRPM());
             telemetry.update();
-// safiosdfkj
 
 
 
@@ -133,6 +146,10 @@ public class DecodeTeleOp2025 extends LinearOpMode {
             } else if (!gamepad2.b) {
                 Outake.StopFeeder();
             }
-// something didn't update
+
+            // testing PID shooter control
+            if (gamepad1.b) {
+                Outake.SetShooterPower(Outake.PIDControl(shooterEncSpeed, Outake.GetCurrentRPM()));
+            }
         }
     }}
