@@ -19,7 +19,7 @@ public class DecodeTeleOp2025 extends LinearOpMode {
     private DcMotor driveBL = null;
     private DcMotor driveFR = null;
     private DcMotor driveBR = null;
-    private double shooterSpeed = 0.5;
+    private double shooterSpeed = 0.35;;
 
 
     @Override
