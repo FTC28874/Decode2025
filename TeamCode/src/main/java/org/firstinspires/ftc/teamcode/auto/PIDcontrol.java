@@ -1,11 +1,11 @@
 package org.firstinspires.ftc.teamcode.auto;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.util.ElapsedTime;
-@TeleOp
+@Autonomous
 public class PIDcontrol extends LinearOpMode {
     DcMotorEx motor;
     DcMotorEx motor1;
@@ -23,11 +23,11 @@ public class PIDcontrol extends LinearOpMode {
     public void runOpMode() throws InterruptedException {
         motor = hardwareMap.get(DcMotorEx.class, "shootermotorL");
         motor1 = hardwareMap.get(DcMotorEx.class, "shootermotorR");
-        motor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        motor1.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        motor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        motor1.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         waitForStart();
         while (opModeIsActive()) {
-        double power = PIDControl(100, motor.getVelocity());
+        double power = PIDControl(1000, motor.getVelocity());
         motor.setPower(power);
         motor1.setPower(power);
         }
