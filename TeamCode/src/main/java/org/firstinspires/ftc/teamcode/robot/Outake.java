@@ -88,7 +88,7 @@ public class Outake {
             shooterL.setPower(shooterPower);
             shooterR.setPower(shooterPower);
         }
-    }//asdf
+    }//asdfa
 
     public static void StopShooter() {
         if (shooterL != null && shooterR != null) {
