@@ -118,7 +118,7 @@ public class DecodeTeleOp2025 extends LinearOpMode {
             telemetry.addData("Error: ", shooterEncSpeed - Outake.GetCurrentRPM());
             telemetry.update();
 
-
+//asdf
 
             // ---- SHOOTER / INTAKE CONTROL ----
             if (gamepad2.right_bumper) {
