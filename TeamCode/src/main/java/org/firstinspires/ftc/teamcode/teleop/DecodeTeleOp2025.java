@@ -88,23 +88,14 @@ public class DecodeTeleOp2025 extends LinearOpMode {
             driveBL.setPower(powerBL);
             driveBR.setPower(powerBR);
 
+
             if (gamepad1.dpad_up) {
-                shooterSpeed = shooterSpeed + 0.05;
+                shooterEncSpeed = shooterEncSpeed + 50;
                 while (gamepad1.dpad_up) {}
             }
             if (gamepad1.dpad_down) {
-                shooterSpeed = shooterSpeed - 0.05;
-                while (gamepad1.dpad_down) {}
-            }
-
-
-            if (gamepad1.dpad_right) {
-                shooterEncSpeed = shooterEncSpeed + 50;
-                while (gamepad1.dpad_right) {}
-            }
-            if (gamepad1.dpad_left) {
                 shooterEncSpeed = shooterEncSpeed - 50;
-                while (gamepad1.dpad_left) {}
+                while (gamepad1.dpad_down) {}
             }
 
             // ---- TELEMETRY ----
@@ -112,7 +103,6 @@ public class DecodeTeleOp2025 extends LinearOpMode {
             telemetry.addData("Front left/Right", "%4.2f, %4.2f", powerFL, powerFR);
             telemetry.addData("Back  left/Right", "%4.2f, %4.2f", powerBL, powerBR);
 
-            telemetry.addData("Shooter Speed:", shooterSpeed);
             telemetry.addData("Shooter Target RPM: ", shooterEncSpeed);
             telemetry.addData("Shooter RPM: ", Outake.GetCurrentRPM());
             telemetry.addData("Error: ", shooterEncSpeed - Outake.GetCurrentRPM());
@@ -122,7 +112,7 @@ public class DecodeTeleOp2025 extends LinearOpMode {
 
             // ---- SHOOTER / INTAKE CONTROL ----
             if (gamepad2.right_bumper) {
-                Outake.SetShooterPower(shooterSpeed);
+                Outake.SetShooterPower(Outake.PIDControl(shooterEncSpeed, Outake.GetCurrentRPM()));
             } else if (!gamepad2.right_bumper) {
                 Outake.StopShooter();
             }
